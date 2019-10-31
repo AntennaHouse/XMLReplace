@@ -42,6 +42,8 @@ public class XMLReplace {
 					m=m;
 				else if(m == '&')
 					ampFlag = true;
+				else if (m == ';' && replaceFlag == true && ampFlag == true)
+				    ampFlag = false;
 				else if(m == '\r' || m == '\n' || m == '\f' || m == '\"' || m == '\\' || m == '\'' || m == '\b' || m == '\t' || !Character.isLetterOrDigit(m))
 					m=m;
 				else if(replaceFlag == true && ampFlag == false){
@@ -56,10 +58,6 @@ public class XMLReplace {
 						m = lower[rdm.nextInt(26)];
 					else
 						m=m;
-				
-					if(m == ';' && ampFlag == true)
-						ampFlag = false;
-					
 					//m = 'T';
 				}
 				
