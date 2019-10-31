@@ -42,7 +42,7 @@ public class XMLReplace {
 					m=m;
 				else if(m == '&')
 					ampFlag = true;
-				else if (m == ';' && replaceFlag == true && ampFlag == true)
+				else if (m == ';' && ampFlag == true)
 				    ampFlag = false;
 				else if(m == '\r' || m == '\n' || m == '\f' || m == '\"' || m == '\\' || m == '\'' || m == '\b' || m == '\t' || !Character.isLetterOrDigit(m))
 					m=m;
