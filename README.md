@@ -7,6 +7,9 @@ Text within XML attributes is not modified.  Entities are also not modified.  On
 
  * --mask option will replace all text node characters (except entities) with 'T'.  This option will also work for non-ascii characters.
 
+Example:
+
+    java -jar XMLReplace.jar [--mask] FOFile OutputFile
 
 
 
