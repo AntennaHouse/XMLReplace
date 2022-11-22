@@ -47,24 +47,34 @@ public class XMLReplace {
 			FileWriter sw = new FileWriter(fos);
 			int z;
 			z=sr.read(v);
+
+			// This should be closed by semicolon in XML but end is
+			// also marked for invalid characters like spaces, <,
+			// and >.  This can help with HTML that doesn't
+			// require the semicolon (ex: &amp).
 			boolean ampFlag = false;
 
 			char temp;
 			while(z != -1)
 			{
 				char m = v[0];
-				if(m == '<')
+				if(m == '<') {
 					replaceFlag = false;
-				else if(m == '>')
+					ampFlag = false;
+				} else if(m == '>') {
 					replaceFlag = true;
-				else if(m == ' ' || Character.isSpaceChar(m) || m == 194)
+					ampFlag = false;
+				} else if(m == ' ' || Character.isSpaceChar(m) || m == 194) {
 					m=m;
-				else if(m == '&')
+					ampFlag = false;
+				} else if(m == '&')
 					ampFlag = true;
 				else if (m == ';' && ampFlag == true)
 				    ampFlag = false;
-				else if(m == '\r' || m == '\n' || m == '\f' || m == '\"' || m == '\\' || m == '\'' || m == '\b' || m == '\t' || !Character.isLetterOrDigit(m))
+				else if(m == '\r' || m == '\n' || m == '\f' || m == '\"' || m == '\\' || m == '\'' || m == '\b' || m == '\t' || !Character.isLetterOrDigit(m)) {
 					m=m;
+					ampFlag = false;
+				}
 				else if(replaceFlag == true && ampFlag == false){
 				    if (mask) {
 					m = 'T';
